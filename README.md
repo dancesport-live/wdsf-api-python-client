@@ -1,8 +1,8 @@
 # WDSF API Python Client (unofficial)
 
 [![PyPI](https://img.shields.io/pypi/v/wdsf-api)](https://pypi.org/project/wddsf-api/)
-[![Apache 2.0 License](https://img.shields.io/github/license/dancesport-live/wdsf-api)](https://apache.org/licenses/LICENSE-2.0)
-[![CodeFactor](https://www.codefactor.io/repository/github/dancesport-live/wdsf-api/badge)](https://www.codefactor.io/repository/github/dancesport-live/wdsf-api)
+[![Apache 2.0 License](https://img.shields.io/github/license/dancesport-live/wdsf-api-python-client)](https://apache.org/licenses/LICENSE-2.0)
+[![CodeFactor](https://www.codefactor.io/repository/github/dancesport-live/wdsf-api-python-client/badge)](https://www.codefactor.io/repository/github/dancesport-live/wdsf-api-python-client)
 
 
 ## Installation
