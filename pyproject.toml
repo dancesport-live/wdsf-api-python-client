@@ -5,13 +5,22 @@ build-backend = "hatchling.build"
 [project]
 name = "wdsf-api"
 dynamic = ["version"]
-description = "WDSF API Python Client"
+description = "WDSF API Python Client (unofficial)"
 readme = "README.md"
 license = ""
 dependencies = [
     "dacite",
     "requests",
     "xmltodict",
+]
+keywords = ["WDSF", "World DanceSport Federation", "DanceSport", "API"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: Apache Software License",
+    "Natural Language :: English",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
 ]
 
 [tool.hatch.version]
