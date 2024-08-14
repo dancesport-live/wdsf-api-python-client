@@ -1,0 +1,30 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "wdsf-api"
+dynamic = ["version"]
+description = "WDSF API Python Client"
+readme = "README.md"
+license = ""
+dependencies = [
+    "dacite",
+    "requests",
+    "xmltodict",
+]
+
+[tool.hatch.version]
+path = "wdsf_api/__init__.py"
+
+[tool.hatch.build.targets.sdist]
+include = [
+    "/tests",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["wdsf_api"]
+
+[project.urls]
+Homepage = "https://github.com/dancesport-live/wdsf-api-python-client"
+Issues = "https://github.com/dancesport-live/wdsf-api-python-client/issues"
