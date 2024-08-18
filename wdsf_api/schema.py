@@ -1,8 +1,8 @@
 import datetime
 from enum import Enum
-from typing import List
+from typing import Any, List
 
-from pydantic import BaseModel, ConfigDict, HttpUrl
+from pydantic import AliasChoices, BaseModel, ConfigDict, Field, HttpUrl
 
 
 class Link(BaseModel):
@@ -65,25 +65,57 @@ class Person(BaseModel):
     licenses: List[License] = None
 
 
+class MarkScore(BaseModel):
+    kind: str # 'mark'
+    adjudicator: int
+    link: List[Link]
+    set: bool = None
+
+
+class FinalScore(BaseModel):
+    rank: int
+    kind: str # 'final'
+    adjudicator: int
+    link: List[Link]
+
+
+class Dance(BaseModel):
+    name: str
+    isGroupDance: bool # what is this?
+    scores: List[MarkScore] | List[FinalScore]
+
+
+class Round(BaseModel):
+    name: str
+    maxDeviation: Any # what is this?
+    dances: List[Dance]
+
+
 class Participant(BaseModel):
-    id: int = None
+
+    class Status(str, Enum):
+        Present = 'Present'
+        Excused = 'Excused'
+
+    id: int
+    status: Status
     number: int = None
-    status: str = ''
     basepoints: float = None
     rank: str = None
     competitionId: int = None
-    # rounds: ?
+    rounds:  List[Round] = None
     coupleId: str = ''
     name: str = ''
     country: str = ''
 
 
 class Official(BaseModel):
-    id: int = None
-    name: str = ''
-    country: str = ''
-    task: str = ''
-    letter: str = ''
+    link: List[Link]
+    id: int = Field(validation_alias=AliasChoices('id', 'Id'))
+    name: str = Field(validation_alias=AliasChoices('name', 'Name'))
+    country: str
+    task: str = None
+    letter: str = None
     min: int = None
     competitionId: int = None
 
