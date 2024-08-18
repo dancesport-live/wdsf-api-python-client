@@ -35,7 +35,7 @@ class WdsfApi(Consumer):
         location: The city name where the competition takes/took place.
         '''
 
-    @returns.json(Competition)
+    @returns.json
     @get('competition/{competition_id}')
     def get_competition(self, competition_id: Path) -> Competition:
         '''Get competition by id.'''
@@ -53,7 +53,7 @@ class WdsfApi(Consumer):
     @returns.json
     @get('official')
     def get_officials(self, competition_id: Query('competitionId')) -> List[Official]:
-        '''Get officials of a ccompetition.'''
+        '''Get officials of a competition.'''
 
     @returns.json
     @get('official/{official_id}')
