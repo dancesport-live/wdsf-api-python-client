@@ -21,6 +21,10 @@ class Competition(BaseModel):
         Processing = 'Processing'
         Closed = 'Closed'
         Canceled = 'Canceled'
+    
+    class Division(str, Enum):
+        General = 'General'
+        Professional = 'Professional'
 
     id: int
     name: str = ''
@@ -31,7 +35,7 @@ class Competition(BaseModel):
     age: str = ''
     discipline: str = ''
     # danceform: str
-    division: str = ''
+    division: Division = None
     status: Status = None
     coefficient: float = None
     lastModifiedDate: datetime.datetime = None
@@ -44,6 +48,10 @@ class License(BaseModel):
 
     class Status(str, Enum):
         Active = 'Active'
+        Retired = 'Retired'
+        Expired = 'Expired'
+        Suspended = 'Suspended'
+        Revoked = 'Revoked'
 
     type: str
     status: Status
@@ -53,7 +61,7 @@ class License(BaseModel):
 
 
 class Person(BaseModel):
-    id: int = None
+    id: int
     name: str = ''
     surname: str = ''
     sex: str = ''
@@ -121,11 +129,11 @@ class Official(BaseModel):
 
 
 class Team(BaseModel):
-    id: int = None
+    id: int
 
 
 class Couple(BaseModel):
-    id: int = None
+    id: int
 
 
 class Country(BaseModel):
