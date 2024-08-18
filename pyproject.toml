@@ -11,6 +11,7 @@ license = ""
 dependencies = [
     "dacite",
     "requests",
+    "uplink",
     "xmltodict",
 ]
 keywords = ["WDSF", "World DanceSport Federation", "DanceSport", "API"]
