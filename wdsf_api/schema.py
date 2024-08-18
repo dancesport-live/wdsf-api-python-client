@@ -1,10 +1,28 @@
-from dataclasses import dataclass
 import datetime
+from enum import Enum
 from typing import List
 
-@dataclass
-class Competition:
-    id: int = None
+from pydantic import BaseModel, ConfigDict, HttpUrl
+
+
+class Link(BaseModel):
+    href: HttpUrl
+    rel: str
+    type: str = None
+
+
+class Competition(BaseModel):
+    # model_config = ConfigDict(extra='ignore')
+
+    class Status(str, Enum):
+        PreRegistration = 'PreRegistration'
+        Registering = 'Registering'
+        RegistrationClosed = 'RegistrationClosed'
+        Processing = 'Processing'
+        Closed = 'Closed'
+        Canceled = 'Canceled'
+
+    id: int
     name: str = ''
     location: str = ''
     country: str = ''
@@ -14,22 +32,27 @@ class Competition:
     discipline: str = ''
     # danceform: str
     division: str = ''
-    status: str = ''
-    coefficient: float = 0.0
+    status: Status = None
+    coefficient: float = None
     lastModifiedDate: datetime.datetime = None
     eventId: int = None
     groupId: int = None
+    link: List[Link] | None
 
-@dataclass
-class License:
+
+class License(BaseModel):
+
+    class Status(str, Enum):
+        Active = 'Active'
+
     type: str
-    status: str
+    status: Status
     division: str
     # disciplines: [str]
     expiresOn: datetime.date
 
-@dataclass
-class Person:
+
+class Person(BaseModel):
     id: int = None
     name: str = ''
     surname: str = ''
@@ -41,8 +64,8 @@ class Person:
     nationalReference: str = ''
     licenses: List[License] = None
 
-@dataclass
-class Participant:
+
+class Participant(BaseModel):
     id: int = None
     number: int = None
     status: str = ''
@@ -54,8 +77,8 @@ class Participant:
     name: str = ''
     country: str = ''
 
-@dataclass
-class Official:
+
+class Official(BaseModel):
     id: int = None
     name: str = ''
     country: str = ''
@@ -64,10 +87,14 @@ class Official:
     min: int = None
     competitionId: int = None
 
-@dataclass
-class Team:
+
+class Team(BaseModel):
     id: int = None
 
-@dataclass
-class Couple:
+
+class Couple(BaseModel):
     id: int = None
+
+
+class Country(BaseModel):
+    name: str

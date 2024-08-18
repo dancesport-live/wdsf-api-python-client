@@ -1,8 +1,11 @@
 from collections import namedtuple
+from typing import List
 from uplink import Consumer, get, headers, Path, Query, QueryMap, returns
 
-from wdsf_api.session import Session
-from wdsf_api.parser import Parser
+# from wdsf_api.session import Session
+# from wdsf_api.parser import Parser
+# from wdsf_api.types import Competition
+from wdsf_api.schema import *
 
 ApiResponse = namedtuple('ApiResponse', ['response', 'data'])
 
@@ -32,38 +35,38 @@ class WdsfApi(Consumer):
         modifiedsince [Date] : list competitions that have been modified since this date (YYYY/MM/DDThh:mm:ss)
         worldranking [bool] : true to list competitions that are included in the world ranking list
         division [string] : General/Professional
-        status: The status of the competition. Valid values are:PreRegistration, Registering, RegistrationClosed, Processing, Closed, Canceled
+        status: The status of the competition. Valid values are: PreRegistration, Registering, RegistrationClosed, Processing, Closed, Canceled
         location: The city name where the competition takes/took place.
         '''
 
-    @returns.json
+    @returns.json(Competition)
     @get('competition/{competition_id}')
-    def get_competition(self, competition_id: Path):
+    def get_competition(self, competition_id: Path) -> Competition:
         '''Get competition by id.'''
 
     @returns.json
     @get('participant')
-    def get_participants(self, competition_id: Query('competitionId')):
+    def get_participants(self, competition_id: Query('competitionId')) -> List[Participant]:
         '''Get participants of a competition.'''
     
     @returns.json
     @get('participant/{participant_id}')
-    def get_participant(self, participant_id: Path):
+    def get_participant(self, participant_id: Path) -> Participant:
         '''Get participant of a competition by id.'''
     
     @returns.json
     @get('official')
-    def get_officials(self, competition_id: Query('competitionId')):
+    def get_officials(self, competition_id: Query('competitionId')) -> List[Official]:
         '''Get officials of a ccompetition.'''
 
     @returns.json
     @get('official/{official_id}')
-    def get_official(self, official_id: Path):
+    def get_official(self, official_id: Path) -> Official:
         '''Get official of a competition by id.'''
 
     @returns.json
     @get('couple')
-    def get_couples(self, **filter: QueryMap):
+    def get_couples(self, **filter: QueryMap) -> List[Couple]:
         '''Get a list of all active couples
         
         Use query parameter to filter by
@@ -82,12 +85,12 @@ class WdsfApi(Consumer):
 
     @returns.json
     @get('couple/{couple_id}')
-    def get_couple(self, couple_id: Path):
+    def get_couple(self, couple_id: Path) -> Couple:
         '''Get couple by id'''
 
     @returns.json
     @get('team')
-    def get_teams(self):
+    def get_teams(self) -> List[Team]:
         '''Get a list of all active teams
 
         Use query parameter to filter by
@@ -98,12 +101,12 @@ class WdsfApi(Consumer):
 
     @returns.json
     @get('team/{team_id}')
-    def get_team(self, team_id: Path):
+    def get_team(self, team_id: Path) -> Team:
         '''Get team by id.'''
 
     @returns.json
     @get('person')
-    def get_persons(self, **filter: QueryMap):
+    def get_persons(self, **filter: QueryMap) -> List[Person]:
         '''Get a list of all active persons (athletes/adjudicators/chairman)
 
         Use query parameter to filter by
@@ -120,7 +123,7 @@ class WdsfApi(Consumer):
 
     @returns.json
     @get('person/{min}')
-    def get_person(self, min: Path):
+    def get_person(self, min: Path) -> Person:
         '''Get person by MIN'''
     
     @returns.json
@@ -141,7 +144,7 @@ class WdsfApi(Consumer):
     
     @returns.json
     @get('country')
-    def get_countries(self):
+    def get_countries(self) -> List[Country]:
         '''Get a list of allowed country names.'''
 
     @returns.json
@@ -159,6 +162,8 @@ class WdsfApi(Consumer):
 
 
 '''
+TODO: Helper functions to create filters:
+
 from [DateTime] : list competitions since and including this date (YYYY/MM/DD)
 to [DateTime] : list competitions after and including this date (YYYY/MM/DD)
 modifiedsince [Date] : list competitions that have been modified since this date (YYYY/MM/DDThh:mm:ss)
