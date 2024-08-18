@@ -9,10 +9,8 @@ description = "WDSF API Python Client (unofficial)"
 readme = "README.md"
 license = ""
 dependencies = [
-    "dacite",
-    "requests",
+    "pydantic",
     "uplink",
-    "xmltodict",
 ]
 keywords = ["WDSF", "World DanceSport Federation", "DanceSport", "API"]
 classifiers = [
