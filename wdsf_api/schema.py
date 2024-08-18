@@ -2,7 +2,7 @@ import datetime
 from enum import Enum
 from typing import Any, List
 
-from pydantic import AliasChoices, BaseModel, ConfigDict, Field, HttpUrl
+from pydantic import AliasChoices, BaseModel, Field, HttpUrl
 
 
 class Link(BaseModel):
@@ -12,7 +12,6 @@ class Link(BaseModel):
 
 
 class Competition(BaseModel):
-    # model_config = ConfigDict(extra='ignore')
 
     class Status(str, Enum):
         PreRegistration = 'PreRegistration'
