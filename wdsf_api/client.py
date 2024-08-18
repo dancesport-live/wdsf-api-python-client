@@ -1,16 +1,12 @@
-from collections import namedtuple
 from typing import List
 from uplink import Consumer, get, headers, Path, Query, QueryMap, returns
 
-# from wdsf_api.session import Session
-# from wdsf_api.parser import Parser
-# from wdsf_api.types import Competition
 from wdsf_api.schema import *
 
-ApiResponse = namedtuple('ApiResponse', ['response', 'data'])
 
 @headers({
-    "Accept": "application/json",
+    'Accept': 'application/json',
+    'User-Agent': 'WDSF API Python Client',
 })
 class WdsfApi(Consumer):
     '''A Python Client for the WDSF API.'''
