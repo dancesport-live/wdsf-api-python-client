@@ -1,6 +1,7 @@
 # WDSF API Python Client (unofficial)
 
 [![PyPI](https://img.shields.io/pypi/v/wdsf-api)](https://pypi.org/project/wdsf-api/)
+[![Documentation Status](https://readthedocs.org/projects/wdsf-api-python-client/badge/?version=latest)](https://wdsf-api-python-client.readthedocs.io/en/latest/?badge=latest)
 [![Apache 2.0 License](https://img.shields.io/github/license/dancesport-live/wdsf-api-python-client)](https://apache.org/licenses/LICENSE-2.0)
 [![CodeFactor](https://www.codefactor.io/repository/github/dancesport-live/wdsf-api-python-client/badge)](https://www.codefactor.io/repository/github/dancesport-live/wdsf-api-python-client)
 
@@ -10,6 +11,9 @@ Original documentation for the API can be found [here](https://github.com/jaykay
 
 The client is based on [Uplink](https://uplink.readthedocs.io) and uses [Pydantic](https://docs.pydantic.dev) for (de-)serialization and validation.
 
+**This project is under active development.**
+**Breaking changes must be expected for all `0.1.X` versions.**
+*Yes, I should have started at `0.0.X`. Sorry!*
 
 ## Installation
 
@@ -20,7 +24,7 @@ You can install this library from the [Python Package Index](https://pypi.org/pr
 
 ## Documentation
 
-Coming.
+Coming. Will be published on [Read the Docs](https://wdsf-api-python-client.readthedocs.io/en/latest/).
 
 
 ## License and Disclaimer

@@ -2,7 +2,7 @@ import datetime
 from enum import Enum
 from typing import Any, List
 
-from pydantic import AliasChoices, BaseModel, ConfigDict, Field, HttpUrl
+from pydantic import AliasChoices, BaseModel, Field, HttpUrl
 
 
 class Link(BaseModel):
@@ -12,7 +12,6 @@ class Link(BaseModel):
 
 
 class Competition(BaseModel):
-    # model_config = ConfigDict(extra='ignore')
 
     class Status(str, Enum):
         PreRegistration = 'PreRegistration'
@@ -111,13 +110,17 @@ class Participant(BaseModel):
     basepoints: float = None
     rank: str = None
     competitionId: int = None
-    rounds:  List[Round] = None
+    rounds: List[Round] = None
     coupleId: str = ''
     name: str = ''
     country: str = ''
 
 
 class Official(BaseModel):
+
+    class Task(str, Enum):
+        Adjudicator = 'Adjudicator'
+        
     link: List[Link]
     id: int = Field(validation_alias=AliasChoices('id', 'Id'))
     name: str = Field(validation_alias=AliasChoices('name', 'Name'))
