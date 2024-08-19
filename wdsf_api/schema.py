@@ -110,13 +110,17 @@ class Participant(BaseModel):
     basepoints: float = None
     rank: str = None
     competitionId: int = None
-    rounds:  List[Round] = None
+    rounds: List[Round] = None
     coupleId: str = ''
     name: str = ''
     country: str = ''
 
 
 class Official(BaseModel):
+
+    class Task(str, Enum):
+        Adjudicator = 'Adjudicator'
+        
     link: List[Link]
     id: int = Field(validation_alias=AliasChoices('id', 'Id'))
     name: str = Field(validation_alias=AliasChoices('name', 'Name'))

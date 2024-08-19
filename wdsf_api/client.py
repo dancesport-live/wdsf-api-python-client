@@ -22,18 +22,9 @@ class WdsfApi(Consumer):
     @returns.json
     @get('competition')
     def get_competitions(self, **filter: QueryMap):
-        '''Get a list of all competitions
+        '''Get a list of all competitions.
         
-        Use query parameter to filter by
-
-        from [DateTime] : list competitions since and including this date (YYYY/MM/DD)
-        to [DateTime] : list competitions after and including this date (YYYY/MM/DD)
-        modifiedsince [Date] : list competitions that have been modified since this date (YYYY/MM/DDThh:mm:ss)
-        worldranking [bool] : true to list competitions that are included in the world ranking list
-        division [string] : General/Professional
-        status: The status of the competition. Valid values are: PreRegistration, Registering, RegistrationClosed, Processing, Closed, Canceled
-        location: The city name where the competition takes/took place.
-        '''
+        See also :class:`wdsf_api.query.CompetitionQuery`.'''
 
     @returns.json
     @get('competition/{competition_id}')
@@ -63,20 +54,9 @@ class WdsfApi(Consumer):
     @returns.json
     @get('couple')
     def get_couples(self, **filter: QueryMap) -> List[Couple]:
-        '''Get a list of all active couples
+        '''Get a list of all active couples.
         
-        Use query parameter to filter by
-        
-        name [string] : list only couples where any member's name starts with this filter's value
-        phonetic [bool/optional/default=false] : when true, the name filter is used phonetical instead of litteral.
-        min [list of int] :
-        min,min,min.. : list all couples where the members have any of the MIN given
-        min+min : list all couples where all members have the MIN given (make sure the + is URL encoded!)
-        nameOrMin [string] : list couple having a name or MIN starting with this filter's value
-        ageGroup [string] : list couples of an age group (Adult, Senior I, Senior II, Youth, ...)
-        division [string] : General/Professional
-        status [string] : The couple's status, if not given only active couples will be shown. "Any" will show all.
-        country [string] : The couple's country. Separate each country name by a pipe (|).
+        See also :class:`wdsf_api.query.CoupleQuery`.
         '''
 
     @returns.json
@@ -89,10 +69,7 @@ class WdsfApi(Consumer):
     def get_teams(self) -> List[Team]:
         '''Get a list of all active teams
 
-        Use query parameter to filter by
-
-        name [string] : list only couples where any member's name starts with this filter's value
-        phonetic [bool/optional/default=false] : when true, the name filter is used phonetical instead of litteral.
+        See also :class:`wdsf_api.query.TeamQuery`
         '''
 
     @returns.json
@@ -103,39 +80,22 @@ class WdsfApi(Consumer):
     @returns.json
     @get('person')
     def get_persons(self, **filter: QueryMap) -> List[Person]:
-        '''Get a list of all active persons (athletes/adjudicators/chairman)
+        '''Get a list of all active persons (athletes/adjudicators/chairman).
 
-        Use query parameter to filter by
-
-        name [string] : list all persons having a name starting with this filter's value. Separate name und surname with a comma(,). The order is not relevant.
-        phonetic [bool/optional/default=false] : when true, the name filter is used phonetical instead of litteral.
-        min [int] : list person with this MIN (1xxxxxxx can be omitted)
-        nameOrMin [string] : list persons having a name or MIN starting with this filter's value
-        ageGroup [string] : list persons of an age group (Adult, Senior I, Senior II, Youth, ...)
-        division [string] : General/Professional
-        type [string,string,...] : list persons of a certain type (Athlete, Adjudicator, Chairman)
-        status [string] : list of the person's license status (Active, Retired, Expired, Suspended, Revoked).
+        See also `wdsf_api.query.PersonQuery`.
         '''
 
     @returns.json
     @get('person/{min}')
     def get_person(self, min: Path) -> Person:
-        '''Get person by MIN'''
+        '''Get person by MIN.'''
     
     @returns.json
     @get('ranking')
     def get_ranking(self, **filter: QueryMap):
-        '''Get the world ranking list
+        '''Get the world ranking list.
 
-        Use query paramter to filter by
-
-        ageGroup [string] : the age group (Adult, Senior I, Senior II, Youth, ...)
-        discipline [string] : the discipline (Latin, Standard, Ten Dance)
-        division [string] : the division (General, Professional)
-        form [string] : the dance form (not used yet)
-        gender [string] : the gender (Male, Female)
-        date [Date/optional] : The date of the ranking list (YYYY/MM/DD)
-        limit [int/optional] : Provide only the top x entries
+        See also :class:`wdsf_api.query.RankingQuery`.
         '''
     
     @returns.json
@@ -155,47 +115,3 @@ class WdsfApi(Consumer):
 
         The couple is defined by their MINs.
         This also works for competitions in years other than the current.'''
-
-
-'''
-TODO: Helper functions to create filters:
-
-from [DateTime] : list competitions since and including this date (YYYY/MM/DD)
-to [DateTime] : list competitions after and including this date (YYYY/MM/DD)
-modifiedsince [Date] : list competitions that have been modified since this date (YYYY/MM/DDThh:mm:ss)
-worldranking [bool] : true to list competitions that are included in the world ranking list
-division [string] : General/Professional
-status: The status of the competition. Valid values are:PreRegistration, Registering, RegistrationClosed, Processing, Closed, Canceled
-location: The city name where the competition takes/took place.
-
-name [string] : list only couples where any member's name starts with this filter's value
-phonetic [bool/optional/default=false] : when true, the name filter is used phonetical instead of litteral.
-min [list of int] :
-min,min,min.. : list all couples where the members have any of the MIN given
-min+min : list all couples where all members have the MIN given (make sure the + is URL encoded!)
-nameOrMin [string] : list couple having a name or MIN starting with this filter's value
-ageGroup [string] : list couples of an age group (Adult, Senior I, Senior II, Youth, ...)
-division [string] : General/Professional
-status [string] : The couple's status, if not given only active couples will be shown. "Any" will show all.
-country [string] : The couple's country. Separate each country name by a pipe (|).
-
-name [string] : list only couples where any member's name starts with this filter's value
-phonetic [bool/optional/default=false] : when true, the name filter is used phonetical instead of litteral.
-
-name [string] : list all persons having a name starting with this filter's value. Separate name und surname with a comma(,). The order is not relevant.
-phonetic [bool/optional/default=false] : when true, the name filter is used phonetical instead of litteral.
-min [int] : list person with this MIN (1xxxxxxx can be omitted)
-nameOrMin [string] : list persons having a name or MIN starting with this filter's value
-ageGroup [string] : list persons of an age group (Adult, Senior I, Senior II, Youth, ...)
-division [string] : General/Professional
-type [string,string,...] : list persons of a certain type (Athlete, Adjudicator, Chairman)
-status [string] : list of the person's license status (Active, Retired, Expired, Suspended, Revoked).
-
-ageGroup [string] : the age group (Adult, Senior I, Senior II, Youth, ...)
-discipline [string] : the discipline (Latin, Standard, Ten Dance)
-division [string] : the division (General, Professional)
-form [string] : the dance form (not used yet)
-gender [string] : the gender (Male, Female)
-date [Date/optional] : The date of the ranking list (YYYY/MM/DD)
-limit [int/optional] : Provide only the top x entries
-'''
