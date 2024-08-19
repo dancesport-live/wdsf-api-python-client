@@ -16,8 +16,8 @@ class WdsfApi(Consumer):
         'production': 'https://services.worlddancesport.org/api/1/'
     }
 
-    def __init__(self, env="production", **kwargs):
-        super().__init__(self.BASE_URLS[env], **kwargs)
+    def __init__(self, environment="production", **kwargs):
+        super().__init__(self.BASE_URLS[environment], **kwargs)
 
     @returns.json
     @get('competition')
