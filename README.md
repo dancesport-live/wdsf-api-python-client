@@ -15,12 +15,24 @@ The client is based on [Uplink](https://uplink.readthedocs.io) and uses [Pydanti
 **Breaking changes must be expected for all `0.1.X` versions.**
 *Yes, I should have started at `0.0.X`. Sorry!*
 
-## Installation
+## Installation and Usage
 
-You can install this library from the [Python Package Index](https://pypi.org/project/wdsf-api/) as follows:
+You can install this library from the [Python Package Index](https://pypi.org/project/wdsf-api/):
 
     pip install wdsf-api
 
+You can then create a new client and make a request:
+
+```{python}
+from wdsf_api.client import WdsfApi
+
+client = WdsfApi(
+    environment='production',
+    auth=('WDSF_API_USERNAME', 'WDSF_API_PASSWORD')
+    )
+
+competition = client.get_competition(competition_id=61243)
+```
 
 ## Documentation
 
